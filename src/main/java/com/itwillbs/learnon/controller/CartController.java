@@ -15,7 +15,8 @@ public class CartController {
 	// 장바구니 페이지(Cart)로 포워딩 - Get
 	@GetMapping("Cart")
 	public String cartForm() {
-		return "cart";
+		return "cart"; // cart.jsp
 	}
+	
 	
 }

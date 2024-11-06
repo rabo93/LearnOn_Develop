@@ -17,7 +17,7 @@
 		</div>
 		<div id="hd_right"> <!-- 로그인하면 class에 on 추가 -->
 			<div class="normal-area">
-				<a href="Cart" class="cart-btn">
+				<a href="Cart" class="cart-btn"> 
 					<span class="cart-count">3</span>
 					<i class="fa-solid fa-cart-shopping"></i>
 				</a>

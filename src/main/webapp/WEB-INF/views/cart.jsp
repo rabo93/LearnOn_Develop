@@ -15,9 +15,9 @@
 <script src="js/common.js"></script>
 
 <!-- page 개별 CSS -->
-<link rel="stylesheet" href="css/cart.css">
+<link rel="stylesheet" href="/resources/css/cart.css">
 <!-- page 개별 JS -->
-<script src="js/cart.js"></script>
+<script src="/resources/js/cart.js"></script>
 
 
 </head>
