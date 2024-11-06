@@ -57,7 +57,7 @@ body, button, input, select, textarea {
     align-items: center;
     justify-content: space-between;
 }
-.board-block {
+.cart-order {
     position: relative;
     padding: 1.6rem;
     border-radius: 1rem;
@@ -65,7 +65,7 @@ body, button, input, select, textarea {
     font-size: 1.4rem;
     color: #4d4d4d;
 }
-cart-list {
+.cart-list {
     margin-bottom: 1.4rem;
 }
 
