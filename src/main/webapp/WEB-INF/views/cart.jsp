@@ -7,19 +7,19 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>장바구니</title>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-<link rel="stylesheet" href="/resources/css/reset.css">
-<link rel="stylesheet" href="/resources/css/common.css">
-<link rel="stylesheet" href="/resources/css/main.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/reset.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/common.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/main.css">
 
-<script src="/resources/js/jquery-3.7.1.js"></script>
-<script src="/resources/js/slick.js"></script>
-<script src="/resources/js/index.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/jquery-3.7.1.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/slick.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/index.js"></script>
 
 <!-- page 개별 CSS -->
-<link rel="stylesheet" href="/resources/css/cart.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/cart.css">
     
 <!-- page 개별 JS -->
-<script src="/resources/js/cart.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/cart.js"></script>
 
 </head>
 <body>
