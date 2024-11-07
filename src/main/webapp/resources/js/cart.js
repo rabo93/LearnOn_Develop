@@ -10,3 +10,4 @@
 function orderCart() {
 	window.open("payment.jsp", "id_check", "width=400, height=400");
 }
+
