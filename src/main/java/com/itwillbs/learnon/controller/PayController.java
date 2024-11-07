@@ -13,9 +13,9 @@ public class PayController {
 	private PayService payService;
 	
 	//=================================================================================
-	// 결제 페이지(Cart)로 포워딩 - Get
-	@GetMapping("Payment")
-	public String cartForm() {
+	// 결제 페이지(patment)로 포워딩 - Get
+	@GetMapping("payment")
+	public String payForm() {
 		return "payment"; // payment.jsp
 	}
 	
