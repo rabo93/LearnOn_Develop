@@ -42,11 +42,11 @@
 				<!-- -----------------결제 상품 목록 ---------------->
 				<div class="frame">
 					
-					<!-- 결제 상품 내역 -->
+					<!----------------- 결제 상품 내역 ----------------->
 					<section class="pay-list">
-						<div class="item-link">
-							<div class="pay-item">
-								<h5 class="box-ttl">주문상품</h5>
+						<div class="pay-item">
+							<h5 class="box-ttl">주문상품</h5>
+							<div class="class-box">
 								<div class="class-pic">
 									<img alt="클래스썸네일" src="/resources/images/thumb_01.webp">
 								</div>
@@ -54,24 +54,31 @@
 									<p>[무료특강] 백엔드 개발이 편리해지는 코틀린과 스프링 부트(CLASS_TITLE)</p>
 									<p>박승규(T_ID - MEM_NAME)</p>
 								</div>
-								<!-- 상품 금액 결과 부분 -->
-								<div class="item-result">
-									<span class="price">100,000(CLASS_PRICE)</span>원
-								</div>
+							</div>
+							<!-- 상품 금액부분 -->
+							<div class="item-result">
+								<span class="price">100,000(CLASS_PRICE)</span>원
 							</div>
 						</div>
 					</section>
 					
 					<!-- ----------------- 쿠폰 ---------------->
-					<section class="pay-list">
-						<div class="item-link">
-							<div class="pay-item">
-								<h5 class="box-ttl">쿠폰</h5>
-								<span>쿠폰 할인 금액</span>
-								<span>0원</span>
-								<input type="button" value="쿠폰선택" class="coupon-btn" onclick="">
-								<input type="text" placeholder="쿠폰 코드를 입력해주세요.">
-								<input type="button" value="쿠폰발급" class="coupon-btn" onclick="">
+					<section class="pay-right">
+						<div class="pay-item">
+							<h5 class="box-ttl">쿠폰</h5>
+							<div class="coupon">
+								<div class="coupon-select">
+									<div class="coupon-select-info">
+										<p>쿠폰 할인 금액</p>
+										<span class="coupon-price">0원</span>
+									</div>
+									
+									<input type="button" value="쿠폰선택" class="coupon-btn" onclick="">
+								</div>
+								<div class="coupon-input">
+									<input type="text" placeholder="쿠폰 코드를 입력해주세요." class="coupon-inputbox">
+									<input type="button" value="쿠폰발급" class="coupon-btn" onclick="">
+								</div>
 							</div>
 						</div>
 					</section>
@@ -94,37 +101,36 @@
 								<dd>￦ 269,000</dd>
 							</dl>
 						</div>
-					
 					</section>
 					
 					<!-- ----------------- 결제수단 ---------------->
-					<section class="pay-list">
-						<div class="item-link">
-							<div class="pay-item">
-								<h5 class="box-ttl">결제수단</h5>
-								<div>
-									<input type="radio" name="pay-method" value="card">신용카드
-								</div>
-								<div>
-									<input type="radio" name="pay-method" value="bank">무통장입금(가상계좌)
-								</div>
-							</div>
+					<section class="pay-right">
+						<div class="pay-item">
+							<h5 class="box-ttl">결제수단</h5>
+							<label class="pay-method">
+								<input type="radio" name="pay-method" value="card">
+								<span>신용카드</span>
+							</label>
+							<label class="pay-method">
+								<input type="radio" name="pay-method" value="bank">
+								<span>무통장입금(가상계좌)</span>
+							</label>
 						</div>
 					</section>
 						
 					<!-- ----------------- 이용약관 동의(필수) ---------------->
-					<section class="pay-list">
-						<div class="item-link">
-							<div class="pay-item">
-					<div class="notice-box">
-						<input type="checkbox" id="notice" name="cart1" value="cart1">	
-		 				<label for="notice">이용약관 동의(필수)</label>
-		 				<a href="#">내용보기</a>
-					</div>
-					</div>
-					</div>
+					<section class="pay-right">
+						<div class="pay-item">
+							<div class="notice-box">
+								<label class="notice-check">
+									<input type="checkbox" id="notice" name="cart1" value="cart1">	
+					 				<span>이용약관 동의(필수)</span>
+								</label>
+				 				<a href="#">내용보기</a>
+							</div>
+						</div>
 					</section>	
-					<!-- ----------------- 주문 버튼 ---------------->
+					<!-- ----------------- 결제하기 버튼 ---------------->
 					<div class="btns-box">
 						<input type="submit" value="결제하기" class="btnSubmit" onclick="requestPay()">
 					</div>
@@ -137,7 +143,6 @@
 
 	
 	<!----------------------------- page 영역 --------------------------- -->
-	
 	<footer>
 		<jsp:include page="/WEB-INF/views/inc/bottom.jsp"></jsp:include>
 	</footer>
