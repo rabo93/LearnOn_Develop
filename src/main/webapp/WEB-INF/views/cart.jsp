@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -52,18 +53,29 @@
 							</div>
 							<!-- 주문상품 상세내역(클릭시 상품상세페이지로 이동) -->
 <!-- 						<a href="course-detail" class="item-link"> -->
-							<a href="#" class="item-link">
-								<div class="class-pic">
-									<img alt="클래스썸네일" src="/resources/images/thumb_01.webp">
-								</div>
-								<div class="item-info">
-									<p>[무료특강] 백엔드 개발이 편리해지는 코틀린과 스프링 부트(CLASS_TITLE)</p>
-									<p>박승규(T_ID - MEM_NAME)</p>
-								</div>
-							</a>
+							<c:choose>
+								<%--장바구니에 아무것도 담겨져 있지 않은 경우 --%>
+								<c:when test="${empty cartList}">
+									<p>장바구니에 담은 상품이 없습니다.</p>
+								</c:when>
+								<c:otherwise>
+								<%-- 상품이 존재할 경우(cartList 객체)--%>
+									<c:forEach var="cart" items="#{cartList}">
+										<a href="#" class="item-link">
+											<div class="class-pic">
+												<img alt="클래스썸네일" src="/resources/images/thumb_01.webp">
+											</div>
+											<div class="item-info">
+												<p>${cart.class_title}</p>
+												<p>${cart.mem_name}</p>
+											</div>
+										</a>
+									</c:forEach>
+								</c:otherwise>
+							</c:choose>
 							<!-- 상품 금액 결과 부분 -->
 							<div class="item-result">
-								<span class="price">100,000(CLASS_PRICE)</span>원
+								<span class="price">${cart.class_price}</span>원
 							</div>
 						</div>
 					</section>
