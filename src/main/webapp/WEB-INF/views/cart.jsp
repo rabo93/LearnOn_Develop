@@ -51,6 +51,7 @@
 							    </button>
 							</div>
 							<!-- 주문상품 상세내역(클릭시 상품상세페이지로 이동) -->
+<!-- 						<a href="course-detail" class="item-link"> -->
 							<a href="#" class="item-link">
 								<div class="class-pic">
 									<img alt="클래스썸네일" src="/resources/images/thumb_01.webp">

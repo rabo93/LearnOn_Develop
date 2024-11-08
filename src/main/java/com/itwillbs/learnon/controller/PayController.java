@@ -14,7 +14,7 @@ public class PayController {
 	
 	//=================================================================================
 	// 결제 페이지(patment)로 포워딩 - Get
-	@GetMapping("payment")
+	@GetMapping("Payment")
 	public String payForm() {
 		return "payment"; // payment.jsp
 	}
