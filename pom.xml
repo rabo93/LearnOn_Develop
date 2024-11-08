@@ -4,7 +4,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.itwillbs</groupId>
 	<artifactId>learnon</artifactId>
-	<name>Learn_On</name>
+	<name>Learn_On_KBR</name>
 	<packaging>war</packaging>
 	<version>1.0.0-BUILD-SNAPSHOT</version>
 	<properties>

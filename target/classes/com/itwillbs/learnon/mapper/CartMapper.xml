@@ -3,8 +3,31 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.itwillbs.learnon.mapper.CartMapper">
-<!-- 	<select > -->
+	<!-- 회원ID로 장바구니 목록 조회 -->
+	<!-- 
+	SELECT A.CLASS_TITLE , C.MEM_NAME, A.CLASS_PRICE, A.CLASS_PIC1
+	FROM CLASS A 
+	JOIN CART B 
+	ON A.CLASS_ID = B.CLASS_ID
+	JOIN MEMBER C
+	ON B.MEM_ID = C.MEM_ID
+	WHERE B.MEM_ID = 'hong1234';
+	 -->
+	<select id="selectCart" resultType="cart" parameterType="string">
+		SELECT cl.CLASS_TITLE , m.MEM_NAME, cl.CLASS_PRICE, cl.CLASS_PIC1
+		FROM CART ca
+		JOIN CLASS cl
+		ON ca.CLASS_ID = cl.CLASS_ID
+		JOIN MEMBER m
+		ON ca.MEM_ID = m.MEM_ID
+		WHERE ca.MEM_ID = ${memId}
+	</select>
 	
 	
-<!-- 	</select> -->
+	
+	
+	
+	
+	
+	
 </mapper>

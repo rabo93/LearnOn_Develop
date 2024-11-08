@@ -60,14 +60,15 @@
 								</c:when>
 								<c:otherwise>
 								<%-- 상품이 존재할 경우(cartList 객체)--%>
-									<c:forEach var="cart" items="#{cartList}">
+									<c:forEach var="cart" items="${cartList}">
 										<a href="#" class="item-link">
 											<div class="class-pic">
+												<!-- 썸네일 사진 나중에 바꿀것!! -->
 												<img alt="클래스썸네일" src="/resources/images/thumb_01.webp">
 											</div>
 											<div class="item-info">
-												<p>${cart.class_title}</p>
-												<p>${cart.mem_name}</p>
+												<p>${cart.CLASS_TITLE}</p>
+												<p>${cart.MEM_NAME}</p>
 											</div>
 										</a>
 									</c:forEach>
@@ -75,7 +76,7 @@
 							</c:choose>
 							<!-- 상품 금액 결과 부분 -->
 							<div class="item-result">
-								<span class="price">${cart.class_price}</span>원
+								<span class="price">${cart.CLASS_PRICE}</span>원
 							</div>
 						</div>
 					</section>
@@ -98,8 +99,9 @@
 						</div>
 						<!-- ----------------- 주문 버튼 ---------------->
 						<div class="btns-box">
+							<input type="hidden" name="memId" value="hong1234"> <!-- 예제용으로 회원 ID 하드코딩 -->
 							<input type="submit" value="주문하기" class="btnSubmit" onclick="orderCart()">
-							<input type="button" value="돌아가기" class="btnBack" onclick="history.back()">		
+							<input type="button" value="돌아가기" class="btnBack" onclick="history.back()">
 						</div>
 						<!-- ----------------- 장바구니 약관 ---------------->
 						<div class="notice-box">
