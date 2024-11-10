@@ -34,7 +34,6 @@ s : 초(ss : 초 2자리)
 
 <!-- page 개별 CSS -->
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/cart.css">
-    
 <!-- page 개별 JS -->
 <script src="${pageContext.request.contextPath}/resources/js/cart.js"></script>
 
@@ -53,14 +52,17 @@ s : 초(ss : 초 2자리)
 				<h2 class="cart-ttl">장바구니</h2>
 				<!-- -----------------장바구니 상품 목록 ---------------->
 				<div class="frame">
-					
+				
 					<section class="cart-list">
-						<!-- 전체선택 -->
 						<div class="cart-select">
-							<input type="checkbox" class="check" id="check_all" checked="checked"> <label for="check_all">전체선택</label>
-							<button class="btn-del">선택 삭제</button>
+							<!-- 전체선택 -->
+							<input type="checkbox" id="checkAll" checked="checked">
+							<label for="checkAll">전체선택</label>
+							<!-- 선택삭제 -->
+							<button class="btn-del" onclick="chkDelete()">선택 삭제</button>
 						</div>
 						<!-- 상품 내역1 -->
+						<c:forEach var="cart" items="${cartList}" varStatus="status">
 						<div class="cart-item">
 							<!-- 주문상품 상세내역(클릭시 상품상세페이지로 이동) -->
 <!-- 						<a href="course-detail" class="item-link"> -->
@@ -71,40 +73,39 @@ s : 초(ss : 초 2자리)
 								</c:when>
 								
 								<c:otherwise>
-									<%-- 상품이 존재할 경우(cartList 객체) - 여러개일 경우 반복--%>
-									<c:forEach var="cart" items="${cartList}" varStatus="status">
-										<!-- 상품별 선택버튼 -->
-										<div class="item-btns">
-											<input type="checkbox" class="check" name="checkitem" onclick="checkItem()" value="${cart.CARTITEM_IDX}" >
-<!-- 										    아래 카운트는 나중에 지울겁니당 -->
-										    <span>${status.count}</span>
-										    <button class="btn-del" onclick="deleteItem()">
-										    	<i class="fa-solid fa-xmark"></i>
-										    </button>
+								<%-- 상품이 존재할 경우 - 여러개일 경우 단락 반복--%>
+									<!-- 상품별 선택버튼 -->
+									<div class="item-btns">
+										<input type="checkbox" class="chk" name="checkitem" value="${cart.CARTITEM_IDX}" >
+<!-- 										    아래 카운튼나중에 지울겁니당(확인용) -->
+									    <span>${status.count}</span>
+									    <button class="btn-del" onclick="deleteItem()">
+									    	<i class="fa-solid fa-xmark"></i>
+									    </button>
+									</div>
+									<!-- 상품 정보 -->
+									<a href="#" class="item-link">
+										<div class="class-pic">
+											<!-- 썸네일 사진 나중에 바꿀것!! -->
+											<img alt="클래스썸네일" src="/resources/images/thumb_01.webp">
 										</div>
-										<!-- 상품 정보 -->
-										<a href="#" class="item-link">
-											<div class="class-pic">
-												<!-- 썸네일 사진 나중에 바꿀것!! -->
-												<img alt="클래스썸네일" src="/resources/images/thumb_01.webp">
-											</div>
-											<div class="item-info">
-												<p>${cart.CLASS_TITLE}</p>
-												<p>${cart.MEM_NAME}</p>
-											</div>
-										</a>
-										<!-- 상품 금액 -->
-										<div class="item-result">
-											<fmt:formatNumber var="price" value="${cart.CLASS_PRICE}" type="number"/>
-											<span class="price">${price}</span>원
-											<c:set var="total" value="${total + cart.CLASS_PRICE}" />
+										<div class="item-info">
+											<p>${cart.CLASS_TITLE}</p>
+											<p>${cart.MEM_NAME}</p>
 										</div>
-									</c:forEach>
-										<fmt:formatNumber var="total" value="${total}" type="number"/>
+									</a>
+									<!-- 상품 금액 -->
+									<div class="item-result">
+										<fmt:formatNumber var="price" value="${cart.CLASS_PRICE}" type="number"/>
+										<span class="price">${price}</span>원
+										<c:set var="total" value="${total + cart.CLASS_PRICE}" />
+									</div>
 								</c:otherwise>
 								
 							</c:choose>
 						</div>
+						</c:forEach>
+						<fmt:formatNumber var="total" value="${total}" type="number"/>
 					</section>
 					
 					<!-- ----------------- 장바구니 주문 금액 ---------------->
