@@ -1,5 +1,22 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>    
+<%--
+JSTL - format(fmt) 라이브러리를 활용하여 날짜 및 시각 형식(포맷) 변경
+1) <fmt:formatDate> : Date 등의 날짜 및 포맷 객체의 날짜 형식 변경
+   => <fmt:formatDate value="${날짜 및 시각 객체}" pattern="표현패턴">
+   => 자바의 SimpleDateFormat 등의 포맷팅 클래스와 동일한 역할 수행
+2) <fmt:parseDate> : String 객체의 날짜 형식 변경
+----------------------------------------------------------------------
+[ 날짜 및 시각 형식을 지정하는 패턴 문자 ]
+y : 연도(yy : 연도 2자리, yyyy : 연도 4자리)
+M : 월(MM : 월 2자리)
+d : 일(dd : 일 2자리)
+H : 시(HH : 24시간제, hh : 12시간제)
+m : 분(mm : 분 2자리)
+s : 초(ss : 초 2자리) 
+--%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -73,11 +90,11 @@
 										<span class="coupon-price">0원</span>
 									</div>
 									
-									<input type="button" value="쿠폰선택" class="coupon-btn" onclick="">
+									<input type="button" value="쿠폰선택" class="coupon-btn" onclick="couponSelect()">
 								</div>
 								<div class="coupon-input">
-									<input type="text" placeholder="쿠폰 코드를 입력해주세요." class="coupon-inputbox">
-									<input type="button" value="쿠폰발급" class="coupon-btn" onclick="">
+									<input type="text" placeholder="쿠폰 코드를 입력해주세요." class="coupon-inputbox" name="couponCode">
+									<input type="button" value="쿠폰발급" class="coupon-btn" onclick="couponCreate()">
 								</div>
 							</div>
 						</div>

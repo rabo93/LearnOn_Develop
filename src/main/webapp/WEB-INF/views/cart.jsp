@@ -1,6 +1,23 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>    
+<%--
+JSTL - format(fmt) 라이브러리를 활용하여 날짜 및 시각 형식(포맷) 변경
+1) <fmt:formatDate> : Date 등의 날짜 및 포맷 객체의 날짜 형식 변경
+   => <fmt:formatDate value="${날짜 및 시각 객체}" pattern="표현패턴">
+   => 자바의 SimpleDateFormat 등의 포맷팅 클래스와 동일한 역할 수행
+2) <fmt:parseDate> : String 객체의 날짜 형식 변경
+----------------------------------------------------------------------
+[ 날짜 및 시각 형식을 지정하는 패턴 문자 ]
+y : 연도(yy : 연도 2자리, yyyy : 연도 4자리)
+M : 월(MM : 월 2자리)
+d : 일(dd : 일 2자리)
+H : 시(HH : 24시간제, hh : 12시간제)
+m : 분(mm : 분 2자리)
+s : 초(ss : 초 2자리) 
+--%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -40,17 +57,11 @@
 					<section class="cart-list">
 						<!-- 전체선택 -->
 						<div class="cart-select">
-							<input type="checkbox" id="check_all"> <label for="check_all">전체선택</label>
+							<input type="checkbox" class="check" id="check_all" checked="checked"> <label for="check_all">전체선택</label>
 							<button class="btn-del">선택 삭제</button>
 						</div>
 						<!-- 상품 내역1 -->
 						<div class="cart-item">
-							<div class="item-btns">
-								<input type="checkbox" id="cart1" name="cart1" value="cart1">
-							    <button class="btn-del">
-							    	<i class="fa-solid fa-xmark"></i>
-							    </button>
-							</div>
 							<!-- 주문상품 상세내역(클릭시 상품상세페이지로 이동) -->
 <!-- 						<a href="course-detail" class="item-link"> -->
 							<c:choose>
@@ -58,9 +69,20 @@
 								<c:when test="${empty cartList}">
 									<p>장바구니에 담은 상품이 없습니다.</p>
 								</c:when>
+								
 								<c:otherwise>
-								<%-- 상품이 존재할 경우(cartList 객체)--%>
-									<c:forEach var="cart" items="${cartList}">
+									<%-- 상품이 존재할 경우(cartList 객체) - 여러개일 경우 반복--%>
+									<c:forEach var="cart" items="${cartList}" varStatus="status">
+										<!-- 상품별 선택버튼 -->
+										<div class="item-btns">
+											<input type="checkbox" class="check" name="checkitem" onclick="checkItem()" value="${cart.CARTITEM_IDX}" >
+<!-- 										    아래 카운트는 나중에 지울겁니당 -->
+										    <span>${status.count}</span>
+										    <button class="btn-del" onclick="deleteItem()">
+										    	<i class="fa-solid fa-xmark"></i>
+										    </button>
+										</div>
+										<!-- 상품 정보 -->
 										<a href="#" class="item-link">
 											<div class="class-pic">
 												<!-- 썸네일 사진 나중에 바꿀것!! -->
@@ -71,13 +93,17 @@
 												<p>${cart.MEM_NAME}</p>
 											</div>
 										</a>
+										<!-- 상품 금액 -->
+										<div class="item-result">
+											<fmt:formatNumber var="price" value="${cart.CLASS_PRICE}" type="number"/>
+											<span class="price">${price}</span>원
+											<c:set var="total" value="${total + cart.CLASS_PRICE}" />
+										</div>
 									</c:forEach>
+										<fmt:formatNumber var="total" value="${total}" type="number"/>
 								</c:otherwise>
+								
 							</c:choose>
-							<!-- 상품 금액 결과 부분 -->
-							<div class="item-result">
-								<span class="price">${cart.CLASS_PRICE}</span>원
-							</div>
 						</div>
 					</section>
 					
@@ -86,15 +112,15 @@
 						<div class="price-box">
 							<dl>
 								<dt>총 상품 금액</dt>
-								<dd>￦ 269,000</dd>
+								<dd><c:out value="${total}원" /></dd>
 							</dl>
 							<dl>
 								<dt>선택 상품 수</dt>
-								<dd>총 <span>2</span>건</dd>
+								<dd>총 <span>${count}</span>건</dd>
 							</dl>
 							<dl class="total">
 								<dt>주문 금액</dt>
-								<dd>￦ 269,000</dd>
+								<dd><span>${result}</span>원</dd>
 							</dl>
 						</div>
 						<!-- ----------------- 주문 버튼 ---------------->

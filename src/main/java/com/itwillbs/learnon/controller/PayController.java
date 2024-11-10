@@ -13,12 +13,11 @@ public class PayController {
 	private PayService payService;
 	
 	//=================================================================================
-	// 결제 페이지(patment)로 포워딩 - Get
+	// 결제 페이지(patment.jsp)로 포워딩 - Get
 	@GetMapping("Payment")
 	public String payForm() {
 		return "payment"; // payment.jsp
 	}
-	
 	
 	
 	

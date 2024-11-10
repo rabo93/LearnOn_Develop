@@ -1,5 +1,4 @@
 @charset "UTF-8";
-/* --------------태그 정리-------------- */
 
 .cart-wrap {
     max-width: 800px;
@@ -91,6 +90,9 @@
     color: var(--primary);
 }
 
+
+
+/* 오른쪽 부분 */
 .cart-right {
     flex: 0 1 260px;
 }
@@ -113,11 +115,12 @@
     margin-top: 10px;
     border-top: 1px solid #ddd;
 }
-.cart-right .price-box dl dt{}
 .cart-right .price-box dl dd {
     font-weight: 700;
 }
 
+
+/* 버튼 */
 .btns-box {
     margin-top: 10px;
     display: flex;
