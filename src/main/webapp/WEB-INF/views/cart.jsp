@@ -34,7 +34,8 @@ s : 초(ss : 초 2자리)
 
 <!-- page 개별 CSS -->
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/cart.css">
-<!-- page 개별 JS -->
+<!-- page 개별 JS 
+	 (defer 속성 : 페이지가 모두 로드된 후에 해당 외부 스크립트가 실행됨) --> 
 <script src="${pageContext.request.contextPath}/resources/js/cart.js"></script>
 
 </head>
@@ -56,13 +57,14 @@ s : 초(ss : 초 2자리)
 					<section class="cart-list">
 						<div class="cart-select">
 							<!-- 전체선택 -->
+<!-- 							<input type="checkbox" id="checkAll"> -->
 							<input type="checkbox" id="checkAll" checked="checked">
 							<label for="checkAll">전체선택</label>
 							<!-- 선택삭제 -->
 							<button class="btn-del" onclick="chkDelete()">선택 삭제</button>
 						</div>
-						<!-- 상품 내역1 -->
-						<c:forEach var="cart" items="${cartList}" varStatus="status">
+						<!-- 상품 내역 cartList객체를 cart에 담음 -->
+						<c:forEach var="cart" items="${cartList}" varStatus="status"> 
 						<div class="cart-item">
 							<!-- 주문상품 상세내역(클릭시 상품상세페이지로 이동) -->
 <!-- 						<a href="course-detail" class="item-link"> -->
@@ -76,18 +78,20 @@ s : 초(ss : 초 2자리)
 								<%-- 상품이 존재할 경우 - 여러개일 경우 단락 반복--%>
 									<!-- 상품별 선택버튼 -->
 									<div class="item-btns">
-										<input type="checkbox" class="chk" name="checkitem" value="${cart.CARTITEM_IDX}" >
-<!-- 										    아래 카운튼나중에 지울겁니당(확인용) -->
-									    <span>${status.count}</span>
+<%-- 										<input type="checkbox" class="chk" name="checkitem" value="${cart.CARTITEM_IDX}" > --%>
+										<input type="checkbox" class="chk" name="checkitem" value="cart.checkitem">
+											<!-- 아래 카운튼나중에 지울겁니당(확인용) -->
+										    <span>${status.count}</span>
 									    <button class="btn-del" onclick="deleteItem()">
 									    	<i class="fa-solid fa-xmark"></i>
 									    </button>
 									</div>
-									<!-- 상품 정보 -->
-									<a href="#" class="item-link">
+									<!-- 상품 정보 A태그 선택시 CLASS_ID 출력-->
+									<a href='<c:out value="${cart.CLASS_ID}"/>' class="item-link">
 										<div class="class-pic">
 											<!-- 썸네일 사진 나중에 바꿀것!! -->
-											<img alt="클래스썸네일" src="/resources/images/thumb_01.webp">
+											<img src="/resources/images/thumb_01.webp">
+<%-- 											<img src="${cart.CLASS_PIC1}"> --%>
 										</div>
 										<div class="item-info">
 											<p>${cart.CLASS_TITLE}</p>
@@ -104,7 +108,7 @@ s : 초(ss : 초 2자리)
 								
 							</c:choose>
 						</div>
-						</c:forEach>
+						</c:forEach> <!-- foreach문 끝 -->
 						<fmt:formatNumber var="total" value="${total}" type="number"/>
 					</section>
 					
