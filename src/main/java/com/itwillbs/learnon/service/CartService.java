@@ -17,6 +17,11 @@ public class CartService {
 	public List<CartVO> getCartList(String memId) {
 		return mapper.selectCart(memId);
 	}
+
+	//장바구니 상품 삭제 요청
+	public int deleteCart(int cartId) {
+		return mapper.deleteCart(cartId);
+	}
 	
 	
 	

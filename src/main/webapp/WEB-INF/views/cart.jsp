@@ -61,7 +61,7 @@ s : 초(ss : 초 2자리)
 							<input type="checkbox" id="checkAll" checked="checked">
 							<label for="checkAll">전체선택</label>
 							<!-- 선택삭제 -->
-							<button class="btn-del" onclick="chkDelete()">선택 삭제</button>
+							<button class="btn-del" onclick="chkDelete()">선택삭제</button>
 						</div>
 						<!-- 상품 내역 cartList객체를 cart에 담음 -->
 						<c:forEach var="cart" items="${cartList}" varStatus="status"> 
@@ -78,16 +78,16 @@ s : 초(ss : 초 2자리)
 								<%-- 상품이 존재할 경우 - 여러개일 경우 단락 반복--%>
 									<!-- 상품별 선택버튼 -->
 									<div class="item-btns">
-<%-- 										<input type="checkbox" class="chk" name="checkitem" value="${cart.CARTITEM_IDX}" > --%>
-										<input type="checkbox" class="chk" name="checkitem" value="cart.checkitem">
+										<input type="checkbox" class="chk" name="checkitem" value="${cart.CLASS_ID}">
 											<!-- 아래 카운튼나중에 지울겁니당(확인용) -->
 										    <span>${status.count}</span>
+<%-- 									    <button class="btn-del" onclick="deleteItem(this)" data-cartitem-id="${cart.CARTITEM_IDX}"> --%>
 									    <button class="btn-del" onclick="deleteItem()">
 									    	<i class="fa-solid fa-xmark"></i>
 									    </button>
 									</div>
-									<!-- 상품 정보 A태그 선택시 CLASS_ID 출력-->
-									<a href='<c:out value="${cart.CLASS_ID}"/>' class="item-link">
+									<!-- 상품 정보 내역 클릭시 강의 상세 페이지로 이동(CLASS_ID 전달)-->
+									<a href='CourseDetail?CLASS_ID=${cart.CLASS_ID}' class="item-link">
 										<div class="class-pic">
 											<!-- 썸네일 사진 나중에 바꿀것!! -->
 											<img src="/resources/images/thumb_01.webp">
@@ -102,6 +102,7 @@ s : 초(ss : 초 2자리)
 									<div class="item-result">
 										<fmt:formatNumber var="price" value="${cart.CLASS_PRICE}" type="number"/>
 										<span class="price">${price}</span>원
+										<!-- 반복하면서 각 상품의 가격을 total에 누적 -->
 										<c:set var="total" value="${total + cart.CLASS_PRICE}" />
 									</div>
 								</c:otherwise>
@@ -109,7 +110,6 @@ s : 초(ss : 초 2자리)
 							</c:choose>
 						</div>
 						</c:forEach> <!-- foreach문 끝 -->
-						<fmt:formatNumber var="total" value="${total}" type="number"/>
 					</section>
 					
 					<!-- ----------------- 장바구니 주문 금액 ---------------->
@@ -117,15 +117,16 @@ s : 초(ss : 초 2자리)
 						<div class="price-box">
 							<dl>
 								<dt>총 상품 금액</dt>
-								<dd><c:out value="${total}원" /></dd>
+								<fmt:formatNumber var="total" value="${total}" type="number"/>
+								<dd><c:out value="${total}원"/></dd>
 							</dl>
 							<dl>
 								<dt>선택 상품 수</dt>
-								<dd>총 <span>${count}</span>건</dd>
+								<dd>총 <span id="itemCount">0</span>건</dd>
 							</dl>
 							<dl class="total">
 								<dt>주문 금액</dt>
-								<dd><span>${result}</span>원</dd>
+								<dd><span id="totalAmount">0</span>원</dd>
 							</dl>
 						</div>
 						<!-- ----------------- 주문 버튼 ---------------->
