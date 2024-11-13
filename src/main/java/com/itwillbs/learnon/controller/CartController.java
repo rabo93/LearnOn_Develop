@@ -1,6 +1,8 @@
 package com.itwillbs.learnon.controller;
 
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -74,10 +76,8 @@ public class CartController {
 		// CartService - deleteCart() 메서드 호출
 		// 파라미터 : CARTITEM_IDX    리턴타입 : int(삭제갯수)
 		int deleteCount = cartService.deleteCart(cartitem);
-		System.out.println("cartitem: " + cartitem);
 		
 		
-		System.out.println("삭제된 항목 수: " + deleteCount);
 		//DB 삭제 결과 
 		if(deleteCount > 0) { //삭제 성공시
 			model.addAttribute("msg", "삭제 성공");
@@ -90,27 +90,31 @@ public class CartController {
 	}//DeleteItem-Get매핑끝
 	
 	// 2) '선택삭제' 버튼 클릭시 체크한 여러개의 cartitem_idx 확인 후 장바구니 상품 삭제
-//	@GetMapping("DeleteItems")
-//	public String deleteItem(@RequestParam("cartitem_idx") List<Integer> cartitemList,
-//							 HttpSession session, Model model) {
-//		
-//		// CartService - deleteCart() 메서드 호출
-//		// 파라미터 : CARTITEM_IDX    리턴타입 : int(삭제갯수)
-//		int deleteCount = cartService.deleteCart(cartitemList);
-//		System.out.println("cartitemList: " + cartitemList);
-//		System.out.println("삭제된 항목 수: " + deleteCount);
-//		
-//		
-//		//DB 삭제 결과 
-//		if(deleteCount > 0) { //삭제 성공시
-//			model.addAttribute("msg", "삭제 성공");
-//		} else { //실패시
-//			model.addAttribute("msg", "삭제 실패");
-//		}
-//		
-//		//장바구니 페이지로 리다이렉트
-//		return "redirect:/Cart";
-//	}//DeleteItem-Get매핑끝
+	@GetMapping("DeleteItems")
+	public String deleteItems(@RequestParam("cartitem_idx") String cartItemsParam, Model model) {
+		// cartitem_idx를 콤마로 구분(분리)하여 각각의 요소를 List<Integer>객체(배열)에 묶어서 저장
+		List<Integer> cartItems = Arrays.stream(cartItemsParam.split(",")) //Arrays.stream()은 배열을 스트림으로 변환
+								.map(Integer::parseInt) //map()은 스트림의 각 요소에 대해 변환 작업, 지금은 String 값을 Integer로 변환하는 작업 
+								.collect(Collectors.toList());//Stream<Integer>로 변환된 값을 다시 List<Integer>로 변환
+		
+		// CartService - deleteManyCart() 메서드 호출
+		// 파라미터 : CARTITEM_IDXS(List객체..?)    리턴타입 : int(삭제갯수)
+		int deleteCounts = cartService.deleteManyCart(cartItems);
+		System.out.println("삭제된 항목 수: " + deleteCounts);
+		
+		
+		//DB 삭제 결과 
+		if(deleteCounts > 0) { //삭제 성공시
+			model.addAttribute("msg", "삭제 성공");
+		} else { //실패시
+			model.addAttribute("msg", "삭제 실패");
+		}
+		
+		//장바구니 페이지로 리다이렉트
+		return "redirect:/Cart";
+		
+		
+	}//DeleteItem-Get매핑끝
 	
 	
 	

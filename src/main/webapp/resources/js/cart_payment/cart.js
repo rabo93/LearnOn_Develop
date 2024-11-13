@@ -98,48 +98,47 @@ $(document).on("click", ".btn-del", function(e) {
 
 //================================================================
 // '선택삭제' 버튼 클릭시 체크한 상품을 장바구니 테이블에서 삭제 chkDelete()
-//function chkDelete() {
-//	// 선택한 체크박스 가져오기 (상수로 선언=const 변하지 않는 값)
-//	const selectedChk = document.querySelectorAll('.chk:checked');
-//	
-//	if(selectedChk.length == 0) {
-//		alert("선택된 상품이 없습니다.");
-//		return;
-//	}
-//	
-//	// 삭제 확인
-//    if (!confirm("선택된 상품을 삭제하시겠습니까?")) {
-//        return;
-//    }
-//    
-//    // 삭제할 항목의 인덱스를 배열에 저장
-//    let cartItemIdx = [];
-////    console.log(cartItemIdx);
-//    selectedChk.forEach(checkbox => {
-//        cartItemIdx.push(checkbox.value); // 체크된 항목의 값(cartitem_idx)을 배열에 추가
-//    });
-//
-//	//AJAX 요청을 통해 삭제 처리    
-//    $.ajax({
-//		type : "GET", //삭제같은 경우 POST를 이용해야할 수도..
-//		uri : "DeleteItems",
-//		data : { //넘겨줄 데이터들 작성
-////			cartitem_idx : cartItemIdx.join(",") }, //여러개면 묶어서 List객체로 넘겨줌
-//			cartitem_idx : cartItemIdx }, // 배열 형태로 전송
-//		traditional: true, // 배열 형태로 서버에 전송할 때 필요
-//		success : function(result) {
-//			console.log(result);
-//			alert("선택한 상품이 삭제되었습니다.");
-//			location.reload();// 삭제 후 페이지 새로 고침
-//		},
-//		error : function(jqXHR) {
-//			console.log("삭제 요청중 오류 발생 : "+ jqXHR);
-//			alert("삭제에 실패하였습니다. 다시 시도해주세요.");
-//		}
-//		
-//	});
-//    
-//}
+function chkDelete() {
+	// 삭제 확인 메세지
+    if (!confirm("선택된 상품을 삭제하시겠습니까?")) {
+        return;
+    }
+	
+	// 선택한 체크박스 가져오기 (상수로 선언=const 변하지 않는 값)
+	const selectedChk = []; 
+	document.querySelectorAll('.chk:checked').forEach(checkbox => {
+		selectedChk.push(checkbox.value); // 체크된 항목의 cartitem_idx 값을 배열에 넣기
+	});
+	
+	if(selectedChk.length == 0) {
+		alert("선택된 상품이 없습니다.");
+		return;
+	}
+   
+    //선택된 항목들을 콤마로 구분된 문자열로 결합
+    const cartItemsParam = selectedChk.join(","); 
+    
+    
+	//AJAX 요청을 통해 삭제 처리    
+    $.ajax({
+		type : "GET", //삭제같은 경우 POST를 이용해야할 수도..
+		uri : "DeleteItems",
+		data : { //넘겨줄 데이터들 작성
+			cartitem_idx : cartItemsParam }, //요청 파라미터
+		
+		success : function(result) {
+			console.log(result);
+			alert("선택한 상품이 삭제되었습니다.");
+			location.reload();// 삭제 후 페이지 새로 고침
+		},
+		error : function(jqXHR) {
+			console.log("삭제 요청중 오류 발생 : "+ jqXHR);
+			alert("삭제에 실패하였습니다. 다시 시도해주세요.");
+		}
+		
+	});
+    
+}
 
 
 
