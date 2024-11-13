@@ -7,19 +7,10 @@ function couponSelect() {
 // "쿠폰발급" 클릭 시 입력된 쿠폰번호 코드 확인 후 생성
 function couponCreate() {
 	
+	
+	
+	
 }
-
-
-
-
-
-
-
-
-
-
-
-
 
 //=============================================================================
 //https://developers.portone.io/opi/ko/integration/start/v1/auth?v=v1

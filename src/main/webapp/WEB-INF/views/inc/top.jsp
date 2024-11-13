@@ -5,7 +5,7 @@
 <header id="hd">
 	<section id="hd_top">
 		<div id="hd_logo">
-			<a href="./"><h1><img src="/resources/images/hd_logo2.png" alt="런온"></h1></a>
+			<a href="./"><h1><img src="${pageContext.request.contextPath}/resources/images/hd_logo2.png" alt="런온"></h1></a>
 		</div>
 		<div id="hd_sch">
 			<form action="" method="post">

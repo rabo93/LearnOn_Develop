@@ -16,6 +16,5 @@
 	<typeAliases>
 		<typeAlias type="com.itwillbs.learnon.vo.CartVO" alias="cart" />
 		<typeAlias type="com.itwillbs.learnon.vo.CouponVO" alias="coupon" />
-<!-- 		<typeAlias type="com.itwillbs.learnon.vo.BoardVO" alias="board" /> -->
 	</typeAliases>
 </configuration>

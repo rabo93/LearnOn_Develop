@@ -4,7 +4,7 @@
 <footer id="ft">
 	<div class="ft-wrap">
 		<div class="top">
-			<div class="ft-logo"><img src="/resources/images/ft_logo2.png" alt="learn on" /></div>
+			<div class="ft-logo"><img src="${pageContext.request.contextPath}/resources/images/ft_logo2.png" alt="learn on" /></div>
 			<div class="info1">
 				<p>고객센터 1588-0105</p>
 				<span>운영시간 09:00 ~ 18:00</span>
