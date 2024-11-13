@@ -21,7 +21,7 @@ public class CartService {
 	}
 
 	//장바구니 상품 삭제 요청
-	public int deleteCart(List<Integer> cartitem) {
+	public int deleteCart(String cartitem) {
 		return mapper.deleteCart(cartitem);
 	}
 

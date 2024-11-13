@@ -9,7 +9,7 @@ public interface CartMapper {
 	List<CartVO> selectCart(String sId);
 
 	// 장바구니 상품 1개 삭제 (int타입으로 리턴받을꺼임)
-	int deleteCart(List<Integer> cartitem);
+	int deleteCart(String cartitem);
 
 //	int deleteCart(String memId, List<Integer> cartitemList);
 }

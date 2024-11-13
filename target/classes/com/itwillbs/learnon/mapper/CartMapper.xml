@@ -25,12 +25,12 @@
 	<delete id="deleteCart">
 		DELETE 
 		FROM CART		
-		WHERE CARTITEM_IDX IN
-		   <foreach collection="cartitem" item="item" open="(" separator="," close=")">
-		       #{item}
-		   </foreach>
+		WHERE CARTITEM_IDX = #{cartitem}
 	</delete>
 	
-<!-- 		WHERE CARTITEM_IDX = #{cartitem} -->
+<!-- 		WHERE CARTITEM_IDX IN -->
+<!-- 		   <foreach collection="cartitem" item="item" open="(" separator="," close=")"> -->
+<!-- 		       #{item} -->
+<!-- 		   </foreach> -->
 	
 </mapper>

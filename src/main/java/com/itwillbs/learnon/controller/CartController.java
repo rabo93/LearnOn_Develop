@@ -68,8 +68,8 @@ public class CartController {
 	// DeleteItem 서블릿 주소 매핑시 비즈니스 로직
 	// 1) X 버튼 클릭시 cartitem_idx 확인 후 장바구니 상품 삭제 
 	@GetMapping("DeleteItem")
-	public String deleteItem(@RequestParam("cartitem_idx") List<Integer> cartitem,
-							 HttpSession session, Model model) {
+	public String deleteItem(@RequestParam("cartitem_idx") String cartitem,
+							  Model model) {
 		
 		// CartService - deleteCart() 메서드 호출
 		// 파라미터 : CARTITEM_IDX    리턴타입 : int(삭제갯수)
