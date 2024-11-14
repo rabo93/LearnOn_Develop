@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <script src="${pageContext.request.contextPath}/resources/js/top.js"></script>
+    
 <%-- header --%>
 <header id="hd">
 	<section id="hd_top">
@@ -18,7 +19,7 @@
 		<div id="hd_right"> <!-- 로그인하면 class에 on 추가 -->
 			<div class="normal-area">
 				<a href="Cart" class="cart-btn"> 
-					<span class="cart-count">3</span>
+					<span class="cart-count" id="cartCount"></span>
 					<i class="fa-solid fa-cart-shopping"></i>
 				</a>
 				<a href="#" class="login-btn">로그인</a>
@@ -138,4 +139,5 @@
 		</ul>
 	</nav>
 </header>
+
 <%-- // header --%>

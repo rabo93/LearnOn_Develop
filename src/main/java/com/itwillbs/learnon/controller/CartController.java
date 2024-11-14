@@ -1,18 +1,24 @@
 package com.itwillbs.learnon.controller;
 
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.itwillbs.learnon.service.CartService;
 import com.itwillbs.learnon.vo.CartVO;
@@ -47,7 +53,7 @@ public class CartController {
 		//--------------------------------------------------------------
 		// CartService - getCartList() 메서드 호출하여 장바구니 목록 조회 요청
 	    List<CartVO> cartList = cartService.getCartList(sId);
-		System.out.println(cartList);// [CartVO(CARTITEM_IDX=7, CLASS_ID=240107, MEM_ID=teacher01, CLASS_TITLE=자바 초급 강의 4편, MEM_NAME=이선생, CLASS_PRICE=70000, CLASS_PIC1=, cnt=0), CartVO(CARTITEM_IDX=6, CLASS_ID=240106...
+//		System.out.println(cartList);// [CartVO(CARTITEM_IDX=7, CLASS_ID=240107, MEM_ID=teacher01, CLASS_TITLE=자바 초급 강의 4편, MEM_NAME=이선생, CLASS_PRICE=70000, CLASS_PIC1=, cnt=0), CartVO(CARTITEM_IDX=6, CLASS_ID=240106...
 	    
 	    // Model 객체에 cartList 객체 결과값 저장하고 jsp뷰페이지로 객체 전달
 		model.addAttribute("cartList", cartList); 
@@ -63,7 +69,6 @@ public class CartController {
 	public String CourseDetail() {
 		return "course_detail"; 
 	}//CourseDetail-Get매핑 끝
-	
 	
 	
 	//=================================================================================
@@ -89,18 +94,27 @@ public class CartController {
 		return "redirect:/Cart";
 	}//DeleteItem-Get매핑끝
 	
+	
 	// 2) '선택삭제' 버튼 클릭시 체크한 여러개의 cartitem_idx 확인 후 장바구니 상품 삭제
 	@GetMapping("DeleteItems")
 	public String deleteItems(@RequestParam("cartitem_idx") String cartItemsParam, Model model) {
+//		System.out.println("DeleteItems 호출됨");
+		
 		// cartitem_idx를 콤마로 구분(분리)하여 각각의 요소를 List<Integer>객체(배열)에 묶어서 저장
 		List<Integer> cartItems = Arrays.stream(cartItemsParam.split(",")) //Arrays.stream()은 배열을 스트림으로 변환
 								.map(Integer::parseInt) //map()은 스트림의 각 요소에 대해 변환 작업, 지금은 String 값을 Integer로 변환하는 작업 
 								.collect(Collectors.toList());//Stream<Integer>로 변환된 값을 다시 List<Integer>로 변환
+//		System.out.println(cartItems); //[8, 7, 6, 3]
+		
 		
 		// CartService - deleteManyCart() 메서드 호출
 		// 파라미터 : CARTITEM_IDXS(List객체..?)    리턴타입 : int(삭제갯수)
 		int deleteCounts = cartService.deleteManyCart(cartItems);
-		System.out.println("삭제된 항목 수: " + deleteCounts);
+		
+
+		//INFO : jdbc.sqltiming - DELETE FROM CART WHERE CARTITEM_IDX IN ( 5 , 4 ) 
+//		 {executed in 66 msec}
+//		System.out.println("삭제된 항목 수: " + deleteCounts); //삭제된 항목 수: 4
 		
 		
 		//DB 삭제 결과 
@@ -112,16 +126,40 @@ public class CartController {
 		
 		//장바구니 페이지로 리다이렉트
 		return "redirect:/Cart";
-		
-		
 	}//DeleteItem-Get매핑끝
 	
 	
+	//=================================================================================
+	// 장바구니 갯수 표시
+	@ResponseBody
+	@GetMapping("CartCount")
+	public String cartCount(@RequestParam(value = "sId", defaultValue = "bborara") String sId,
+							HttpSession session) {
+		
+		//세션아이디값 가져오기 => 멤버로그인 연동하고 설정
+//		String sId = (String) session.getAttribute("sId");
+//		System.out.println(sId);
+		
+		//로그인 여부
+//		if (sId == null) {
+//	        return "redirect:/MemberLogin"; //로그인 페이지로 리다이렉트
+//			return Collections.singletonMap("cartCount", 0);  // 로그인되지 않은 경우 0 반환
+//	    }
+		
+		//해당 로그인아이디로 담긴 장바구니 갯수 조회 요청
+		int cartCount = cartService.getCartCount(sId);
+		
+		//JSON 형식으로 응답하기 위해 Map에 담아서 반환
+		Map<String, Integer> result = new HashMap<String, Integer>();
+		result.put("cartCount", (Integer)cartCount);
+		
+		//Map으로 담은 JSON을 화면에 표출하기 위해서는 JSONObject으로 생성
+		JSONObject jo = new JSONObject(result);
+		
+		return jo.toString(); //문자열로 변환하여 리턴
+	}
 	
-	
-	
-	
-	
+	//=================================================================================
 	
 	
 	

@@ -24,12 +24,17 @@ public class CartService {
 	public int deleteCart(String cartitem) {
 		return mapper.deleteCart(cartitem);
 	}
+	
 	//체크박스 클릭된 상품들에 대한 삭제 요청
 	public int deleteManyCart(List<Integer> cartItems) {
 		return mapper.deleteCarts(cartItems);
 	}
-
 	
+	//장바구니 갯수 조회 요청
+	public int getCartCount(String sId) {
+		return mapper.countCart(sId);
+	}
+
 	
 	
 }

@@ -4,6 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.itwillbs.learnon.service.CartService;
 import com.itwillbs.learnon.service.PayService;
@@ -13,21 +15,21 @@ public class PayController {
 	@Autowired
 	private PayService payService;
 	
-	
 	//=================================================================================
-	// 결제 페이지(patment.jsp) 매핑 - Get
-	@GetMapping("Payment")
+	// 결제 페이지(patment.jsp) 매핑 - POST
+	// 결제 페이지 비즈니스 로직 
+	// 장바구니 페이지에서 
+	@ResponseBody
+	@PostMapping("Payment")
 	public String payForm() {
+		
+		
+		
+		
+		
+		
 		return "cart_payment/payment"; // payment.jsp
 	}
-	
-	//=================================================================================
-	// 결제 페이지 비즈니스 로직 
-//	@PostMapping("Payment") 
-//	public String payment() {
-//		
-//	}
-	
 	
 	
 	
